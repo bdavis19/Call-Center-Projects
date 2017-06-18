@@ -1,0 +1,15 @@
+---
+title: "Phone Statistics - Capstone Proposal"
+subtitle: "Springboard - Fundamentals of Data Science"
+author: "Barry Davis"
+date: "June 17, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What's your problem?
+A call center is receiving customer complaints of hold times that are too long. Customers are becoming aggrevated and having a poor experience, the representatives are dealing with high levels of stress due to aggrevated customers, and some customers decide to hang up before reaching a representative. This leads to lower sales and unresolved issues for the customers.
+
