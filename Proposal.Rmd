@@ -10,6 +10,19 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## What's your problem?
+## What's sems to be problem?
 A call center is receiving customer complaints of hold times that are too long. Customers are becoming aggrevated and having a poor experience, the representatives are dealing with high levels of stress due to aggrevated customers, and some customers decide to hang up before reaching a representative. This leads to lower sales and unresolved issues for the customers.
 
+## How is this helpful?
+I will evaluate the call volume and begin to look at current patterns. What gaps in staff coverage exist? Are there patterns in volume peaks and valleys? The client will review the findings and recommendations to determine appropriate staffing levels in hopes to answer each customer in a timely manner.
+
+## What's the data set?
+I will be using a data set that covers the span of two months. This includes the events for each call made, their timestamps, the CDN used, the application used, and the skillset used for each call along with other data points. I have been given access to these data sets as examples.
+
+## What's the approach?
+First, I will start with a high level view and work my way down. To begin, I will look at the monthly views, then weekly, daily, and hourly. I'm interested in the data points of calls offered, calls answered, calls abandoned, routed, terminated, maximum answer time, average answer time, and abandoned after threshold. I believe the data set I'm using can accomplish all of these things.
+
+In addition, it would be helpful to view information by skillset, time interval, and the agents who received the calls.
+
+## What is required of me?
+I will hand over the code for all assessments in addition to a report that reviews my findings. At the end, I'll make a recommendation based off of this for an appropriate staffing level.
