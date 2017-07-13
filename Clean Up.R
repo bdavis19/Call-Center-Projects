@@ -23,13 +23,20 @@ sum(is.na(apps))
 sum(is.na(skills))
 grep("^$", skills)
 
-# We need to separate the timestamp fields so that they are in a date and time field
+# We will be putting the timestamps into the correct format for use.
 apps$statTimestamp <- ymd_hms(apps$statTimestamp)
 skills$statTimestamp <- ymd_hms(skills$statTimestamp)
 
 # We'll need to change the chr variables to numerics
 apps[ , 2:25 :=lapply(.SD, as.numeric), .SDcols = 2:25]
 skills[ , 2:26 :=lapply(.SD, as.numeric), .SDcols = 2:26]
+
+# Remove 2015 data as it's erroneously in the data set
+apps <- apps %>% filter(year(statTimestamp) != 2015)
+
+# Remove December data as it's just data from a few days.
+apps <- apps %>% filter(month(statTimestamp) != 12)
+apps <- left_join(apps, mapps, by="ApplicationID")
 
 # Create new files for those that needed clean up.
 write.table(apps, "aggint_application_refined.csv", row.names = FALSE)

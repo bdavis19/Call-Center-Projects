@@ -1,0 +1,42 @@
+---
+title: "Exploratory Analysis - Initial Questions"
+author: "Barry Davis"
+date: "July 13, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+# Exploratory Analysis
+## Call Flow
+It's best to start with how a call is processed in the phone system. For the majority of calls, the call comes in through the main phone number and is presented with a menu of options. Each option represents a CDN entry point. After selecting an option, the call is sent to an application. It's at this point where we want to collect Calls Offered and Calls Abandoned. The vast majority of calls will be abandoned at this level. It's possible to have abandonment at the skillset level, but it's very infrequent since the time delay between an application passing a call to a skillset is usually within seconds. Calls Abandoned prior to the application represent callers who never made a choice in the phone menu, so the client is disinterested in counting those stats since they don't affect queue wait times.
+
+Once it arrives at the skillset, it connects a caller with an available agent. At this point, the call is considered "Answered", so here is where we collect Calls Answered.
+
+## Questions
+First, let's look at what questions we want to answer to begin our exploratory analysis of the data.
+
+### Call Volume
+We'll want to take a look at call volume at a high level first. Since the data only includes 180 days of stats, we will look at the past 6 months first, then day of month. 
+
+Next will be the weekly views, followed by day of week.
+
+Lastly, we'll look at the data from an hourly perspective.
+
+In each of these breakdowns, we'll want to further break them down by application or skillset. In the client's current configuration, each application typically sends to a single skillset. However, there are some cases where a call can end up in a skillset that did not come from the main application for that skillset. Call transfers are one scenario, and Call Back calls are another.
+
+This should give us insight into which queues are the most popular and if there's any pattern for volume based on the view we are analyzing. 
+
+### Total Minutes of Talk Time
+We'd like to view the total talk time for calls answered starting on a monthly basis. It may be beneficial to break this down into a weekly or daily view as well. This will give some information that could be beneficial when looking at staffing. Are handle times steadily increasing? Are there any data points that suggest deeper discovery is needed to count for odd data?
+
+### Average Speed to Answer
+How long did customers wait until their calls were answered? This also can be helpful when looking at staffing levels. Again, we will want to break these into months, weeks, days, and possibly hours to help identify anomalies that may need to be explained.
+
+### Call Counts Per Agent
+How many calls do agents take each day? The current target is 55 calls per day per agent. Are some agents not hitting those targets on a consistent basis? What about as an overall call center - are we hitting our goals?
+
+### Usage of Hold
+How many calls were put on hold during a conversation with an agent? What percentage of calls are placed on hold? Are there particular agents who use it more than others? If so, that could indicate an additional training need for that agent. What length of time are customers placed on hold?
