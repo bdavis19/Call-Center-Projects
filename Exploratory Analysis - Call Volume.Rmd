@@ -6,7 +6,27 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# Staging
+## Environment
+```{r}
+library(lubridate)
+library(data.table)
+library(tidyverse)
+```
+
+## Load Data
+```{r}
+apps <- fread("aggint_application_refined.csv", header=TRUE, stringsAsFactors = TRUE)
+skills <- fread("agg_int_skillset_refined.csv")
+```
+
+## Filter Desired Data Sets
+```{r}
+primaryApps <- apps[ApplicationID %in% c(10025, 10021, 10139, 10120, 10037, 10115)]
+primarySkills <- skills[SkillsetID %in% c(10058,10037, 10055,10029,10168,10180)]
 ```
 
 # Call Volume

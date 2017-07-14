@@ -46,5 +46,5 @@ skills <- merge(skills, mskills, by="SkillsetID")
 skills %>% setnames("Name", "SkillsetName")
 
 # Create new files for those that needed clean up.
-write.table(apps, "aggint_application_refined.csv", row.names = FALSE)
-write.table(skills, "agg_int_skillset_refined.csv", row.names = FALSE)
+write.csv(apps, "aggint_application_refined.csv", row.names = FALSE)
+write.csv(skills, "agg_int_skillset_refined.csv", row.names = FALSE)
