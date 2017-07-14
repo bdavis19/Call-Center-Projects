@@ -15,6 +15,14 @@ In this document we will perform exploratory analysis on Calls Offered, Calls An
 # Monthly Call Volume
 We're going to be looking at specific applications to determine call volume. The applications are directly accessed after selecting a menu option when the client's phone number is dialed.
 
+```{r}
+ggplot(primaryApps, aes(x = month(statTimestamp), y = CallsOffered, fill = ApplicationName)) + 
+  geom_bar(stat="identity")
+ggplot(primaryApps, aes(x = month(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primarySkills, aes(x = month(statTimestamp), y = CallsAnswered, fill = SkillsetName)) + 
+  geom_bar(stat="identity")
+```
 
 
 ## Including Plots

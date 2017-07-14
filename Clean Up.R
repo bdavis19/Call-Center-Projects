@@ -32,11 +32,18 @@ apps[ , 2:25 :=lapply(.SD, as.numeric), .SDcols = 2:25]
 skills[ , 2:26 :=lapply(.SD, as.numeric), .SDcols = 2:26]
 
 # Remove 2015 data as it's erroneously in the data set
-apps <- apps %>% filter(year(statTimestamp) != 2015)
+apps <- apps[year(statTimestamp) != 2015]
+skills <- skills[year(statTimestamp) != 2015]
 
 # Remove December data as it's just data from a few days.
-apps <- apps %>% filter(month(statTimestamp) != 12)
-apps <- left_join(apps, mapps, by="ApplicationID")
+apps <- apps[month(statTimestamp) != 12]
+apps <- merge(apps, mapps, by="ApplicationID")
+apps %>% setnames("Name", "ApplicationName")
+skills <- skills[month(statTimestamp) != 12]
+skills <- merge(skills, mapps, by="ApplicationID")
+skills %>% setnames("Name", "ApplicationName")
+skills <- merge(skills, mskills, by="SkillsetID")
+skills %>% setnames("Name", "SkillsetName")
 
 # Create new files for those that needed clean up.
 write.table(apps, "aggint_application_refined.csv", row.names = FALSE)

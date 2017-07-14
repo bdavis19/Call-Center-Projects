@@ -5,8 +5,37 @@ library(data.table)
 
 # Call Volume
 # Focus on the major application entry points: 10025, 10021, 10139, 10120, 10037, 10115
-primaryApps <- apps %>% filter(ApplicationID == 10025 | ApplicationID == 10021 | ApplicationID == 10139 | ApplicationID == 10120 | ApplicationID == 10037 | ApplicationID == 10115)
-ggplot(primaryApps, aes(x = month(statTimestamp), y = CallsOffered, fill = Name)) + 
+primaryApps <- apps[ApplicationID %in% c(10025, 10021, 10139, 10120, 10037, 10115)]
+primarySkills <- skills[SkillsetID %in% c(10058,10037, 10055,10029,10168,10180)]
+
+# Plot monthly view of calls offered, abandoned, answered
+ggplot(primaryApps, aes(x = month(statTimestamp), y = CallsOffered, fill = ApplicationName)) + 
+  geom_bar(stat="identity")
+ggplot(primaryApps, aes(x = month(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primarySkills, aes(x = month(statTimestamp), y = CallsAnswered, fill = SkillsetName)) + 
   geom_bar(stat="identity")
 
-primaryApps %>% filter(month(statTimestamp) == 1) %>% select(CallsOffered) %>% tally()
+# week
+ggplot(primaryApps, aes(x = week(statTimestamp), y = CallsOffered, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primaryApps, aes(x = week(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primarySkills, aes(x = week(statTimestamp), y = CallsAnswered, fill = SkillsetName)) +
+  geom_bar(stat="identity")
+
+# day of month
+ggplot(primaryApps, aes(x = mday(statTimestamp), y = CallsOffered, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primaryApps, aes(x = mday(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primarySkills, aes(x = mday(statTimestamp), y = CallsAnswered, fill = SkillsetName)) +
+  geom_bar(stat="identity")
+
+# day of week
+ggplot(primaryApps, aes(x = wday(statTimestamp), y = CallsOffered, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primaryApps, aes(x = wday(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
+  geom_bar(stat="identity")
+ggplot(primarySkills, aes(x = wday(statTimestamp), y = CallsAnswered, fill = SkillsetName)) +
+  geom_bar(stat="identity")
