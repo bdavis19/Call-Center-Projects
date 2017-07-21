@@ -65,5 +65,6 @@ p <- ggplot(primaryApps, aes(x = mday(statTimestamp), y = WaitTime, fill = Appli
   stat_summary(fun.y = "mean", geom = "bar")
 ggplotly(p)
 p <- ggplot(primaryApps, aes(x = hour(statTimestamp), y = WaitTime, fill = ApplicationName)) +
+  xscale + 
   stat_summary(fun.y = "mean", geom = "bar")
 ggplotly(p)
