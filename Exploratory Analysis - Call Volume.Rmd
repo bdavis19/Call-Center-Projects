@@ -15,6 +15,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(lubridate)
 library(data.table)
 library(tidyverse)
+library(plotly)
 ```
 
 ## Load Data
@@ -36,8 +37,11 @@ In this document we will perform exploratory analysis on Calls Offered, Calls An
 We're going to be looking at specific applications to determine call volume. The applications are directly accessed after selecting a menu option when the client's phone number is dialed.
 
 ```{r}
-ggplot(primaryApps, aes(x = month(statTimestamp), y = CallsOffered, fill = ApplicationName)) + 
-  geom_bar(stat="identity")
+p <- ggplot(primaryApps, aes(x = month(statTimestamp, label = TRUE, abbr = TRUE), y = CallsOffered, fill = ApplicationName)) + 
+  geom_bar(stat="identity") +
+  xlab("Month") + ylab("Total Calls") +
+  ggtitle("Monthly Total Call Volume")
+ggplotly(p)
 ggplot(primaryApps, aes(x = month(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
   geom_bar(stat="identity")
 ggplot(primarySkills, aes(x = month(statTimestamp), y = CallsAnswered, fill = SkillsetName)) + 
