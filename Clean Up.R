@@ -143,19 +143,53 @@ primaryApps %>% group_by(hour(statTimestamp), ApplicationName) %>% rename(month 
 # Implement Erlang-C
 #####################
 #
-# Specify Arrival Rate A: 360 calls in 15 min/900 seconds
-# Specify duration Ts: AHT
-# Specify number of agents m: num agents
-# Calculate traffic intensity u: u = A * Ts
-# Calculate agent occupancy p: p = u / m
-# Calculate the Erlang-C formula Ec(m, u): Ec(m, u) = (u^m/m!) / (u^m/m! + (1 - p) m-1{k-0 u^k/k!)
-# Calculate probability of waiting Ec(m,u): Ec(m, u) * 100
-# Calculate average speed of answer Tw: Tw = (Ec(m, u) * T) / (m * (1 - p))
-# Calculate Service level:
-#   t = target answer time
-#   W(t) = Prob(waiting time <= t): = 1 * Ec(m, u) * e^(-(m-u) * t/Ts)
 # Calculate agents needed:
 #   If the service level  is specified and you want to calculate the number of agents needed, then you must do a bit
 #     of trial and error. You have to find the number of agents that will just achieve the service level you want.
 #     A good starting point is the traffic intensity, rounded up to next integer. Then increase the number of agents
 #     until the required service level is met.
+
+# Calls for 8am - 6pm, get to calls per second
+# Specify Arrival Rate A: 360 calls in 15 min/900 seconds
+callsWorkHours <- primaryApps %>% filter(hour(statTimestamp) >= 8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(CallsOffered) %>% sum()
+arrivalPerHour <- callsWorkHours / (30 * 10)
+arrivalRate <- arrivalPerHour / 4
+arrivalRate <- arrivalRate / 900
+
+# Talk Time + wrap up + hold
+# Specify duration Ts: AHT
+talkTime <- primarySkills %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(TalkTime) %>% sum()
+callsAnswered <- primarySkills %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(CallsAnswered) %>% sum()
+postTime <- primarySkills %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(PostCallProcessingTime) %>% sum()
+duration <- (talkTime + postTime)/callsAnswered
+
+# Specify number of agents m: num agents
+numAgents <- 38
+
+# Calculate traffic intensity u: u = A * Ts
+trafficIntensity <- arrivalRate * duration
+
+# Calculate agent occupancy p: p = u / m
+agentOccupancy <- trafficIntensity / numAgents
+
+# Erlang-C Ec(m, u) = (u^m/m!) / (u^m/m! + (1 - p) m-1{k=0 u^k/k!)
+numerator <- trafficIntensity^numAgents/factorial(numAgents)
+sigma <- 0
+for (i in 0:(numAgents-1)){
+  sigma <- sigma + trafficIntensity^i / factorial(i)
+}
+denominator <- numerator + ((1 - agentOccupancy) * sigma)
+erlangC <- numerator/denominator
+
+# Calculate probability of waiting Ec(m,u): Ec(m, u) * 100
+waitProb <- erlangC * 100
+
+# Calculate average speed of answer Tw: Tw = (Ec(m, u) * T) / (m * (1 - p))
+avgSpeedAnswer <- (erlangC * duration) / (numAgents * (1 - agentOccupancy))
+
+# Calculate Seravice level:
+#   t = target answer time
+#   W(t) = Prob(waiting time <= t): = 1 * Ec(m, u) * e^(-(m-u) * t/Ts)
+targetAnswerTime <- 45
+exponent <- -(numAgents - trafficIntensity) * (targetAnswerTime / duration)
+serviceLevel <- 1 - erlangC * exp(exponent)
