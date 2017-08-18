@@ -1,42 +1,44 @@
-"SkillsetID","Name"
-10165,"bcs_xfer"
-10054,"bilingual"
-10161,"billing_overflow"
-10182,"cc_xfer_to_commercial"
-10175,"chat"
-10056,"commercial"
-10072,"commercial_level2"
-10071,"commercial_sales"
-10160,"csr_overflow"
-10042,"csr_supervisors"
-10005,"customer_service"
-10058,"disconnect"
-10037,"dbb"
-10028,"dbb_backup"
-10004,"emergency_on"
-10050,"eph_dispatch"
-10055,"hs"
-10183,"inet_assist_xfer_to_p"
-10180,"install_upgrades"
-10172,"l2_callback"
-10029,"main_csr_billing"
-10052,"main_dispatch"
-10169,"plant_emergency"
-10006,"plg_express"
-10018,"tech_support"
-10164,"techs"
-10046,"telephone_provisioning"
-10151,"training"
-10168,"troubleshooting"
-10051,"tsr_telephone"
-10057,"tunk_dispatch"
-10176,"vip_customer"
-10177,"vip_overflow"
-10178,"xfer_from_ivr"
-10188,"xfer_from_pn"
-10149,"em_core_email"
-10035,"core_super_store"
-10059,"core_wireless_wnp"
-10173,"p_2_xfer"
-10179,"p_csr_xfer_2_brc"
-10150,"wc_core_webchat"
+"SkillsetID","CustID","TemplateID","NetworkSkillsetID","Name","Comment","ActivityCode","DN","IsNetworked","CallSourcePreference","CallAgePreference","NightServiceType","CallRequestQueueSize","CallRequestQueueSizeThreshold","DeleteDate","ChangeID","IncludeLocalNode","ContactID","SkillsetCategory","TargetServiceLevel","ServiceLevelRouting","DynamicAssignment","Server"
+10004,1,10020,NA,"emergency_on","",0,NA,0,17,19,0,0,0,NA,"04",0,10000,0,0,0,0,1
+10005,1,10020,NA,"customer_service","",0,NA,0,17,19,0,0,0,NA,"07",0,10000,0,0,0,0,1
+10006,1,10020,NA,"plg_express","",1002,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10018,1,10020,NA,"tech_support","",0,NA,0,17,19,0,0,0,NA,"03",0,10000,0,0,0,0,1
+10028,1,10020,NA,"dbb_backup","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10029,1,10020,NA,"main_csr_billing","",0,NA,0,17,19,0,0,0,NA,"09",0,10000,0,0,0,0,1
+10035,1,10022,NA,"core_super_store","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10037,1,10020,NA,"dbb","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10042,1,10020,NA,"csr_supervisors","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10046,1,10020,NA,"telephone_provisioning","",1003,NA,0,17,19,0,0,0,NA,"03",0,10000,0,0,0,0,1
+10050,1,10020,NA,"eph_dispatch","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10051,1,10020,NA,"tsr_telephone","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10052,1,10020,NA,"main_dispatch","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10054,1,10020,NA,"bilingual","",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10055,1,10020,NA,"hs","",112,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10056,1,10020,NA,"commercial","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10057,1,10020,NA,"tunk_dispatch","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10058,1,10020,NA,"disconnect","",0,NA,0,17,19,0,0,0,NA,"03",0,10000,0,0,0,0,1
+10059,1,10022,NA,"core_wireless_wnp","",0,NA,0,17,19,0,0,0,NA,"03",0,10000,0,0,0,0,1
+10071,1,10020,NA,"commercial_sales","",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10072,1,10020,NA,"commercial_level2","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10149,1,10028,NA,"em_core_email","",0,NA,0,17,18,0,0,0,NA,"07",0,10001,0,0,0,0,1
+10150,1,10028,NA,"wc_core_webchat","",0,NA,0,17,18,0,0,0,NA,"0a",0,10002,0,0,0,0,1
+10151,1,10020,NA,"training","",0,NA,0,17,19,0,0,0,NA,"01",0,10000,0,0,0,0,1
+10160,1,10020,NA,"csr_overflow","",0,NA,0,17,19,0,0,0,NA,"00",0,10000,0,0,0,0,1
+10161,1,10020,NA,"billing_overflow","",0,NA,0,17,19,0,0,0,NA,"00",0,10000,0,0,0,0,1
+10164,1,10020,NA,"techs","BRC Outside Tech Priority Line",0,NA,0,17,19,0,0,0,NA,"05",0,10000,0,0,0,0,1
+10165,1,10020,NA,"bcs_xfer","Xfer back from BCS",0,NA,0,17,19,0,0,0,NA,"05",0,10000,0,0,0,0,1
+10168,1,10020,NA,"troubleshooting","This will take over for what was BRC_TSR_L2",0,NA,0,17,19,0,0,0,NA,"03",0,10000,0,0,0,0,1
+10169,1,10020,NA,"plant_emergency","Emergency services call in here to report lines/poles down",0,NA,0,17,19,0,0,0,NA,"03",0,10000,0,0,0,0,1
+10172,1,10020,NA,"l2_callback","This is for customers to call Level 2 back directly",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10173,1,10020,NA,"p_2_xfer","",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10175,1,10020,NA,"chat","Was BRC D2D sales 2411",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10176,1,10020,NA,"vip_customer","BRC Direct Fiber Customer Outtage Queue",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10177,1,2,NA,"vip_overflow","Overflow if VIP_Customer Skillset OOS",0,NA,0,17,19,0,0,0,NA,"06",0,10000,0,0,0,0,1
+10178,1,10020,NA,"xfer_from_ivr","",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10179,1,10020,NA,"p_csr_xfer_2_brc","PTD CSR transfer back to BRC",0,NA,0,17,19,0,0,0,NA,"03",0,10000,0,0,0,0,1
+10180,1,10020,NA,"install_upgrades","This skillset is replacing BRC Customer Service",0,NA,0,17,19,0,0,0,NA,"05",0,10000,0,0,0,0,1
+10182,1,10020,NA,"cc_xfer_to_commercial","This is a skillset that Call center agents will transfer Commercial calls to",0,NA,0,17,19,0,0,0,NA,"02",0,10000,0,0,0,0,1
+10183,1,2,NA,"inet_assist_xfer_to_p","Internet Assistance calls from the BRC Troubleshooting Menu Option 1 ",0,NA,0,17,19,0,0,0,NA,"00",0,10000,0,0,0,0,1
+10188,1,2,NA,"xfer_from_pn","PhoneNet Transfer to BRC",0,NA,0,17,19,0,0,0,NA,"00",0,10000,0,0,0,0,1
+10189,1,2,NA,"unanswered_pn_calls","PhoneNet Transfer to BRC",0,NA,0,17,19,NA,NA,NA,NA,"",NA,NA,NA,NA,NA,NA,NA
+10190,1,2,NA,"xfer_from_new_agent","PhoneNet Transfer to BRC",0,NA,0,17,19,NA,NA,NA,NA,"",NA,NA,NA,NA,NA,NA,NA

@@ -53,8 +53,8 @@ write.csv(skills, "agg_int_skillset_refined.csv", row.names = FALSE)
 # BEGIN EXPLORATORY ANALYSIS
 # Call Volume
 # Focus on the major application entry points: 10025, 10021, 10139, 10120, 10037, 10115
-primaryApps <- apps[ApplicationID %in% c(10025, 10021, 10033, 10120, 10037, 10115)]
-primarySkills <- skills[SkillsetID %in% c(10058,10037, 10055,10029,10168,10180)]
+primaryApps <- apps[ApplicationID %in% c(10032,10110,10104,10117,10038,10025, 10021, 10033, 10120, 10037, 10115)]
+primarySkills <- skills[SkillsetID %in% c(10054,10178,10188,10189,10190,10058,10037, 10055,10029,10168,10180)]
 
 # Add factors
 primaryApps$ApplicationName <- primaryApps$ApplicationName %>% as.factor()
