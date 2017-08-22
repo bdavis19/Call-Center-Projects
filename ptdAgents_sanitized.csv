@@ -1,0 +1,213 @@
+"Employee.Name..Last.name..First.name.","Group","Recording","Monitoring","Permission","Ext","Network.login","email","X","X.1"
+"christman, theresa","Administration","No","Yes","Admin",NA,"theresac","tchristman@corp.ptd.net",NA,NA
+"mendes, jaime","Administration","No","Yes","Admin",NA,"jmendes","jmendes@corp.ptd.net",NA,NA
+"munjone, rhonda","Administration","No","Yes","Admin",NA,"rmunjone","rmunjone@corp.ptd.net",NA,NA
+"","","","","",NA,"","",NA,NA
+"balliet, trisha","Billing","No","Yes","Billing",NA,"trishag","tballiet@corp.ptd.net",NA,NA
+"dietz, susan","Billing","Yes","","",2374,"sdietz","",NA,NA
+"graver, karen","Billing","Yes","","",3756,"kgraver","",NA,NA
+"sacks, lori","Billing","Yes","","",2376,"lorih","",NA,NA
+"montes, renee","Billing","Yes","Yes","Billing",2357,"renees","rstroup@corp.ptd.net",NA,NA
+"shinko, cathy","Billing","Yes","","",2391,"catherinem","",NA,NA
+"winters, beth ann","Billing","Yes","","",2375,"bwinters","",NA,NA
+"spare","Billing","Yes","","",2345,"","",NA,NA
+"spare","Billing","Yes","","",2355,"","",NA,NA
+"","","","","",NA,"","",NA,NA
+"barros, vera","Commercial Sales","Yes","","",2365,"vbarros","",NA,NA
+"bollinger, stephanie","Commercial Sales","Yes","","",2382,"stephanieb","",NA,NA
+"bretz, coleen","Commercial Sales","Yes","","",2295,"coleenb","",NA,NA
+"christman, karen","Commercial Sales","Yes","Yes","Comm Sales",2462,"kchristman","kchristman@corp.ptd.net",NA,NA
+"franya, brittany","Commercial Sales","Yes","","",2368,"bfranya","",NA,NA
+"glaush, sara","Commercial Sales","Yes","","",2204,"sfreeby","",NA,NA
+"hammer, stephanie","Commercial Sales","Yes","","",3736,"shammer","",NA,NA
+"hines, stacy","Commercial Sales","Yes","","",2367,"sbierman","",NA,NA
+"hoppel, scott","Commercial Sales","No","Yes","Comm Sales",NA,"scotth","shoppel@corp.ptd.net",NA,NA
+"horvath, kelly","Commercial Sales","Yes","","",2349,"khorvath","",NA,NA
+"kupillas, lauren","Commercial Sales","Yes","","",2323,"lkupillas","",NA,NA
+"mcgeehan, jack","Commercial Sales","No","","Comm Sales",2265,"jmcgeehan","jmcgeehan@corp.ptd.net",NA,NA
+"orach, maryann","Commercial Sales","Yes","","",2359,"morach","",NA,NA
+"pasquariello, vanessa","Commercial Sales","Yes","","",2479,"vpasquariello","",NA,NA
+"ruch, lori","Commercial Sales","Yes","","",2360,"lorir","",NA,NA
+"weiss, sarah","Commercial Sales","Yes","","",2369,"ssander","",NA,NA
+"schnell, sheila","Commercial Sales","Yes","","Comm Sales",2380,"sheila","",NA,NA
+"shoemaker, morgan","Commercial Sales","Yes","Yes","Comm Sales",2362,"morgans","",NA,NA
+"solt, sallie","Commercial Sales","Yes","","",3287,"ssolt","",NA,NA
+"taptich, mark","Commercial Sales","Yes","","",2363,"mtaptich","",NA,NA
+"spare","Commercial Sales","Yes","","",2379,"","",NA,NA
+"walters, al","Commercial Sales","No","Yes","Comm Sales",NA,"awalters","awalters@corp.ptd.net",NA,NA
+"winters, brandi","Commercial Sales","Yes","","",2482,"brandiw","",NA,NA
+"","","","","",NA,"","",NA,NA
+"computer patrol store","Computer Patrol","Yes","","",2090,"","",NA,NA
+"haydt, wayde","Computer Patrol","No","Yes","Computer Patrol",NA,"waydeh","whaydt@corp.ptd.net",NA,NA
+"kuntz, barbara","Computer Patrol","Yes","","",2302,"barbarak","",NA,NA
+"reitz, melissa","Computer Patrol","Yes","","",2483,"melissar","",NA,NA
+"bendokus, heather","CSR","Yes","Yes","CSR",3316,"heatherb","hbendokus@corp.ptd.net",NA,NA
+"bollinger, brittany","CSR","Yes","","",3754,"brbollinger","",NA,NA
+"burke, penny","CSR","Yes","","",3757,"pburke","",NA,NA
+"chamberlain, julia","CSR","Yes","","",3302,"jchamberlain","",NA,NA
+"clements, emily","CSR","Yes","","",3031,"eclements","",NA,NA
+"colon, michelle","CSR","Yes","","",3300,"mcolon","",NA,NA
+"costenbader, jenelle","CSR","Yes","","",3743,"jcostenbader","",NA,NA
+"costenbader, michelle","CSR","Yes","","",3310,"mcostenbader","",NA,NA
+"costenbader, victoria","CSR","Yes","","",3746,"vcostenbader","",NA,NA
+"cunningham-whisenant, douglas","CSR","Yes","","",3030,"dwhisenant","",NA,NA
+"d'esposito, bree-anne","CSR","Yes","","",3741,"bdesposito","",NA,NA
+"dorward, rita","CSR","Yes","Yes","CSR",2333,"rdorward","",NA,NA
+"dreher, theresa","CSR","Yes","Yes","CSR",3744,"thunsicker","",NA,NA
+"dugan, holly","CSR","Yes","Yes","CSR",3352,"hdugan","",NA,NA
+"dyer, colette","CSR","Yes","","",3307,"coletted","",NA,NA
+"engle, jill","CSR","Yes","","",3755,"jengle","",NA,NA
+"farber, deborah","CSR","Yes","","",3745,"dfarber","",NA,NA
+"field, mallory","CSR","Yes","","",3313,"mnalesnik","",NA,NA
+"fredericks, michele","CSR","No","Yes","CSR",NA,"michelef","mfredericks@corp.ptd.net",NA,NA
+"greensweig, lynda","CSR","Yes","Yes","CSR",3311,"lwillet","lwillet@corp.ptd.net",NA,NA
+"hawk, julie","CSR","Yes","","",3317,"jhawk","",NA,NA
+"hauser, samuel","CSR","Yes","Yes","CSR",3760,"shauser","",NA,NA
+"hawkey, jared","CSR","Yes","Yes","CSR",3750,"jhawkey","",NA,NA
+"heintzelman, tara","CSR","Yes","","",3312,"theintzelman","",NA,NA
+"higgins, kellyann","CSR","Yes","","",3301,"khiggins","",NA,NA
+"hines, kassandra","CSR","Yes","Yes","CSR",3306,"ktirado","",NA,NA
+"kuneck, holly","CSR","Yes","Yes","CSR",2364,"hollyk","hkuneck@corp.ptd.net",NA,NA
+"lee, alexander","CSR","Yes","Yes","CSR",3303,"alee","",NA,NA
+"lobel, carolyn","CSR","Yes","Yes","CSR",3758,"clobel","",NA,NA
+"matos, vanessa","CSR","Yes","","",3033,"vmatos","",NA,NA
+"mckinley, cheyenne","CSR","Yes","","",3318,"cmckinley","",NA,NA
+"mccoy, joseph","CSR","Yes","","",3748,"jmccoy","",NA,NA
+"molenaar, samantha","CSR","Yes","","",3820,"smolenaar","",NA,NA
+"moyer, savannah","CSR","Yes","","",3747,"smoyer","",NA,NA
+"moyer, shaienne","CSR","Yes","","",3373,"semoyer","",NA,NA
+"neff, tristyna neff","CSR","Yes","","",3315,"tneff","",NA,NA
+"parry, lori","CSR","Yes","","",3753,"lparry","",NA,NA
+"pastrick, ryan","CSR","Yes","","",3309,"rpastrick","",NA,NA
+"plant, mary","CSR","Yes","","",3742,"mplant","",NA,NA
+"pomposello, tammie","CSR","Yes","Yes","CSR",2346,"tmpomposello","",NA,NA
+"rager, delton","CSR","Yes","","",3749,"drager","",NA,NA
+"sena, tina","CSR","Yes","","",3752,"tsena","",NA,NA
+"smalley, sherry","CSR","Yes","","",3319,"ssmalley","",NA,NA
+"smith, patricia","CSR","Yes","Yes","CSR",2352,"patricias","psmith@corp.ptd.net",NA,NA
+"stettler, tiffany","CSR","Yes","","",3751,"tstettler","",NA,NA
+"strohl, mallory","CSR","Yes","","",3759,"mstrohl","",NA,NA
+"strohl, theresa","CSR","Yes","","",3314,"tstrohl","",NA,NA
+"wehr, cody","CSR","Yes","","",3032,"cwehr","",NA,NA
+"spare","CSR","Yes","","",3304,"","",NA,NA
+"spare","CSR","Yes","","",3350,"","",NA,NA
+"spare","CSR","Yes","","",3305,"","",NA,NA
+"spare","CSR","Yes","","",3034,"","Barry add these",NA,NA
+"spare","CSR","Yes","","",3035,"","Barry add these",NA,NA
+"spare","CSR","Yes","","",3036,"","Barry add these",NA,NA
+"spare","CSR","Yes","","",3037,"","",NA,NA
+"spare","CSR","Yes","","",3038,"","",NA,NA
+"spare","CSR","Yes","","",3039,"","",NA,NA
+"spare","CSR","Yes","","",3040,"","",NA,NA
+"spare","CSR","Yes","","",3303,"","",NA,NA
+"spare","CSR","Yes","","",3308,"","",NA,NA
+"","","","","",NA,"","",NA,NA
+"agures, jason","NCC","No","Yes","NCC",NA,"jagures","jagures@corp.ptd.net",NA,NA
+"bieling, timothy","NCC","Yes","","",3919,"tbieling","",NA,NA
+"fischer, cody","NCC","Yes","","",2396,"cfischer","",NA,NA
+"gehret, blaine","NCC","Yes","","",2390,"bgehret","",NA,NA
+"kruslicky, donna","NCC","Yes","","",2385,"donnam","",NA,NA
+"montefour, jesse","NCC","Yes","","",3917,"jmontefour","",NA,NA
+"montefour, timothy","NCC","Yes","","",3918,"tmontefour","",NA,NA
+"musser, douglas","NCC","Yes","","",2386,"dmusser","",NA,NA
+"o'brian, shawn","NCC","Yes","Yes","NCC",3618,"shawno","sobrian@corp.ptd.net",NA,NA
+"vargas, james","NCC","Yes","","",2389,"tvargas","",NA,NA
+"werley, scott","NCC","Yes","","",3917,"scottw","",NA,NA
+"zaengle, glenn","NCC","Yes","","",2394,"glennz","",NA,NA
+"","","","","",NA,"","",NA,NA
+"benner, christiana","Sales Engineer","Yes","","",2461,"ckruk","",NA,NA
+"brandt, matthew","Sales Engineer","Yes","","",2470,"mbrandt","",NA,NA
+"clements, frank","Sales Engineer","Yes","Yes","Sales Engineer",NA,"fclements","fclements@corp.ptd.net",NA,NA
+"hartman, jesse","Sales Engineer","Yes","","",2404,"jesseh","",NA,NA
+"hill, steven","Sales Engineer","Yes","","",2405,"shill","",NA,NA
+"klotz, kevin","Sales Engineer","Yes","","",2474,"kklotz","",NA,NA
+"lopez, christopher","Sales Engineer","Yes","","",2407,"clopez","",NA,NA
+"mengel, brian","Sales Engineer","No","Yes","Admin",NA,"bmengel","bmengel@corp.ptd.net",NA,NA
+"miller, raymond","Sales Engineer","Yes","Yes","Sales Engineer",2377,"rmiller","rmiller@corp.ptd.net",NA,NA
+"o'connell, john","Sales Engineer","Yes","","",2477,"joconnell","",NA,NA
+"pritchard, michael","Sales Engineer","Yes","","",2464,"mpritchard","",NA,NA
+"salter, john","Sales Engineer","Yes","","",2489,"jsalter","",NA,NA
+"smith, kevin","Sales Engineer","Yes","","",2450,"ksmith","",NA,NA
+"","","","","",NA,"","",NA,NA
+"augustine, kevin","TSR","Yes","","",3331,"kaugustine","",NA,NA
+"bartram, christopher","TSR","Yes","","",3791,"cbartram","",NA,NA
+"behun, john","TSR","Yes","","",3377,"jsbehun","",NA,NA
+"behun, joseph","TSR","Yes","","",3369,"jbehun","",NA,NA
+"boeman, jeremiah","TSR","Yes","","",3336,"jboeman","",NA,NA
+"brenner, megan","TSR","Yes","","",3325,"mbrenner","",NA,NA
+"castro, david","TSR","Yes","","",3796,"dcastro","",NA,NA
+"christman, rodney","TSR","Yes","","",3340,"rchristman","",NA,NA
+"clark, timothy","TSR","Yes","Yes","TSR",2406,"tclark","tclark@corp.ptd.net",NA,NA
+"cleary, dylan","TSR","Yes","","",3797,"dcleary","",NA,NA
+"craig, debra","TSR","Yes","","",3329,"dcraig","",NA,NA
+"dailey, matthew","TSR","Yes","","",3327,"mdailey","",NA,NA
+"dugan, george","TSR","Yes","","",3326,"gdugan","",NA,NA
+"fabiani, joshua","TSR","Yes","","",3346,"joshuaf","",NA,NA
+"frable, denise","TSR","Yes","","",3322,"denisef","",NA,NA
+"frable, tyler","TSR","Yes","","",3814,"tfrable","",NA,NA
+"gilbert, jason","TSR","Yes","Yes","TSR",2384,"jgilbert","jgilbert@corp.ptd.net",NA,NA
+"grammes, tyler","TSR","Yes","","",3337,"tygrammes","",NA,NA
+"guth, john","TSR","Yes","","",3817,"jguth","",NA,NA
+"hahn, jesse","TSR","Yes","","",3321,"jhahn","",NA,NA
+"handwerk, matthew","TSR","Yes","","",3810,"mhandwerk","",NA,NA
+"haydt, katlyn","TSR","Yes","","",3793,"khaydt","",NA,NA
+"haydt, michael","TSR","Yes","Yes","TSR",2388,"michaelha","mhaydt@corp.ptd.net",NA,NA
+"heiney, jason","TSR","Yes","Yes","TSR",2366,"jheiney","jheiney@corp.ptd.net",NA,NA
+"hines, michael","TSR","Yes","","TSR",3790,"mhines","",NA,NA
+"holguin, brian","TSR","Yes","","TSR",3371,"bholguin","",NA,NA
+"howard, daniel","TSR","No","Yes","TSR",NA,"danielh","dhoward@corp.ptd.net",NA,NA
+"ingles, stephen","TSR","Yes","","",3799,"singles","",NA,NA
+"jacoby, jason","TSR","Yes","","",3379,"jjacoby","",NA,NA
+"kleintop, daniel","TSR","Yes","","",3813,"dkleintop","",NA,NA
+"kresge, dustin","TSR","Yes","","",3339,"dkresge","",NA,NA
+"kuneck, joel","TSR","Yes","","",3816,"jkuneck","",NA,NA
+"lobel, marissa","TSR","Yes","","",3341,"mlobel","",NA,NA
+"long, merissa","TSR","Yes","","",3344,"mlong","",NA,NA
+"long, james","TSR","Yes","","",2681,"jlong","jlong@corp.ptd.net",NA,NA
+"miller, andrew","TSR","Yes","","",3323,"acmiller","",NA,NA
+"moran, kathleen","TSR","Yes","","",3370,"kmoran","",NA,NA
+"muthard, travis","TSR","Yes","","",3330,"tmuthard","",NA,NA
+"nothstein, christy","TSR","Yes","","",3812,"christyw","cnothstein@corp.ptd.net",NA,NA
+"praschnik, nicolas","TSR","Yes","","",3795,"npraschnik","",NA,NA
+"quinn, michael","TSR","Yes","","",3819,"mquinn","",NA,NA
+"richart, justin","TSR","Yes","","",3349,"jrichart","",NA,NA
+"sari, stuart","TSR","Yes","Yes","TSR",2347,"ssari","ssari@corp.ptd.net",NA,NA
+"sauerwine, melvine","TSR","Yes","","",3328,"melvins","",NA,NA
+"sawyer, trina","TSR","Yes","Yes","TSR",2381,"tsawyer","tsawyer@corp.ptd.net",NA,NA
+"scherer, brandon","TSR","Yes","Yes","TSR",2373,"bscherer","bscherer@corp.ptd.net",NA,NA
+"schneck, joshua","TSR","Yes","","",3343,"jschneck","",NA,NA
+"sierra, sammy","TSR","Yes","","",3335,"ssierra","",NA,NA
+"solt, michelle","TSR","Yes","","",3324,"msolt","",NA,NA
+"smith, brent","TSR","Yes","","",3342,"bsmith","",NA,NA
+"smith, bryan","TSR","Yes","","",3338,"brysmith","",NA,NA
+"souders, justin","TSR","Yes","","",3347,"jsouders","",NA,NA
+"strohl, randy","TSR","Yes","","",3798,"rstrohl ","",NA,NA
+"strohl, chad","TSR","Yes","","",3376,"cstrohl","",NA,NA
+"strubinger, george","TSR","Yes","","",3794,"georges","",NA,NA
+"tobia, nicholas","TSR","Yes","","",3378,"ntobia","",NA,NA
+"vogelin, courtney","TSR","Yes","","",3815,"cvogelin","",NA,NA
+"wachs, brian","TSR","Yes","","",3348,"bwachs","",NA,NA
+"windhorn, jarad","TSR","Yes","Yes","TSR",2371,"jwindhorn","jwindhorn@corp.ptd.net",NA,NA
+"young, cole","TSR","Yes","","",3345,"cyoung","",NA,NA
+"zink, martha","CSR","Yes","","",3374,"mzink","",NA,NA
+"spare","TSR","Yes","","",3375,"","",NA,NA
+"spare"," ","Yes"," "," ",2681," "," ",NA,NA
+"spare","","Yes","","",3333,"","",NA,NA
+"spare","","Yes","","",3792,"","",NA,NA
+"spare","","Yes","","",3372,"","",NA,NA
+"spare","TSR","Yes","","",3818,"","",NA,NA
+"spare","","Yes","","",3334,"","",NA,NA
+"spare","","Yes","","",3332,"","",NA,NA
+"spare","","Yes ","","",3381,"","",NA,NA
+"spare","","Yes","","",2497,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3020,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3021,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3022,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3023,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3023,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3024,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3025,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3026,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3027,"","Not assigned to a department",NA,NA
+"spare","","Yes","","",3028,"","Not assigned to a department",NA,NA
+"training room","","Yes","","",3905,"","Barry added these ",NA,NA

@@ -5,24 +5,30 @@ library(data.table)
 library(plotly)
 
 # Load Data
-# PREFIX: m - master list
-mapps <- fread("applications_sanitized.csv")
-mskills <- fread("skillsets_sanitized.csv")
-mcdns <- fread("cdns_sanitized.csv")
-apps <- fread("aggint_application.csv")
-skills <- fread("aggint_skillset.csv")
+apps <- fread("applications_sanitized.csv")
+skills <- fread("skillsets_sanitized.csv")
+agents_ptd <- fread("ptdAgents_sanitized.csv", na.strings = c("", "NA"))
+answered <- fread("answered_sanitized.csv")
 
 # Missing Values (the data was clean to begin with)
-grep("^$", mapps)
-sum(is.na(mapps))
-grep("^$", mskills)
-sum(is.na(mskills))
-grep("^$", mcdns)
-sum(is.na(mcdns))
 grep("^$", apps)
 sum(is.na(apps))
 sum(is.na(skills))
 grep("^$", skills)
+grep("^$", agents_ptd)
+sum(is.na(agents_ptd))
+grep("^$", answered)
+sum(is.na(answered))
+
+# Remove blank rows, remove rows with blank extension columns, remove a number of undesired columns
+agents_ptd <- agents_ptd[rowSums(is.na(agents_ptd)) != ncol(agents_ptd),]
+agents_ptd <- agents_ptd %>% filter(!(is.na(Ext)), Employee.Name..Last.name..First.name. != "spare")
+agents_ptd <- agents_ptd %>% mutate(email = NULL, Permission = NULL, Monitoring = NULL, Recording = NULL, X = NULL, X.1 = NULL)
+colnames(agents_ptd)[colnames(agents_ptd) == "Ext"] <- "AgentID"
+colnames(agents_ptd)[colnames(agents_ptd) == "Network.Login"] <- "Username"
+agents_ptd <- agents_ptd %>% filter(Employee.Name..Last.name..First.name. != "training room")
+agents_ptd <- agents_ptd %>% separate(Employee.Name..Last.name..First.name., c("FirstName", "LastName"), sep = ",", remove = TRUE)
+answered <- answered %>% mutate(CCMID = NULL, ProviderContactID = NULL, Originator = NULL, RoutePoint = NULL, ApplicationStartStamp = NULL, LastTreatmentID = NULL, LastTreatmentStamp = NULL, LastTreatmentTime = NULL, SkillsetQueuedStamp = NULL, InitialDisposition = NULL, ServiceStamp = NULL, NumberOfTimesOnHold = NULL, NumberOfTimesRTQ = NULL, FinalDisposition = NULL, FinalDispositionStamp = NULL, NextSegmentID = NULL, ContactOriginatedStamp = NULL, DisconnectSource = NULL)
 
 # We will be putting the timestamps into the correct format for use.
 apps$statTimestamp <- ymd_hms(apps$statTimestamp)
@@ -38,23 +44,23 @@ skills <- skills[year(statTimestamp) != 2015]
 
 # Remove December data as it's just data from a few days.
 apps <- apps[month(statTimestamp) != 12]
-apps <- merge(apps, mapps, by="ApplicationID")
-apps %>% setnames("Name", "ApplicationName")
 skills <- skills[month(statTimestamp) != 12]
-skills <- merge(skills, mapps, by="ApplicationID")
-skills %>% setnames("Name", "ApplicationName")
-skills <- merge(skills, mskills, by="SkillsetID")
-skills %>% setnames("Name", "SkillsetName")
+
+# TIdy answered
+answered %>% mutate(CCMID = NULL, RoutePoint = NULL, ApplicationStartStamp = NULL, LastTreatmentID = NULL, LastTreatmentStamp = NULL, LastTreatmentTime = NULL, SkillsetQueuedStamp = NULL, InitialDisposition = NULL, ServiceStamp = NULL, NumberOfTimesOnHold = NULL, NumberOfTimesRTQ = NULL, FinalDisposition = NULL, FinalDispositionStamp = NULL, NextSegmentID = NULL, ContactOriginatedStamp = NULL, DisconnectSource = NULL)
 
 # Create new files for those that needed clean up.
-write.csv(apps, "aggint_application_refined.csv", row.names = FALSE)
-write.csv(skills, "agg_int_skillset_refined.csv", row.names = FALSE)
+write.csv(apps, "applications_refined.csv", row.names = FALSE)
+write.csv(skills, "skillsets_refined.csv", row.names = FALSE)
+write.csv(agents_ptd, "agents_ptd_refined.csv", row.names = FALSE)
+write.csv(answered, "answered_refined.csv", row.names = FALSE)
 
 # BEGIN EXPLORATORY ANALYSIS
 # Call Volume
 # Focus on the major application entry points: 10025, 10021, 10139, 10120, 10037, 10115
-primaryApps <- apps[ApplicationID %in% c(10032,10110,10104,10117,10038,10025, 10021, 10033, 10120, 10037, 10115)]
-primarySkills <- skills[SkillsetID %in% c(10054,10178,10188,10189,10190,10058,10037, 10055,10029,10168,10180)]
+apps_primary <- apps[ApplicationID %in% c(10032,10110,10104,10117,10038,10025, 10021, 10033, 10120, 10037, 10115)]
+skills_primary <- skills[SkillsetID %in% c(10054,10178,10188,10189,10190,10058,10037, 10055,10029,10168,10180)]
+answered_primary <- answered[ApplicationID %in% c(10032,10110,10104,10117,10038,10025, 10021, 10033, 10120, 10037, 10115) | SkillsetID %in% c(10054,10178,10188,10189,10190,10058,10037, 10055,10029,10168,10180)]
 
 # Add factors
 primaryApps$ApplicationName <- primaryApps$ApplicationName %>% as.factor()
@@ -151,20 +157,23 @@ primaryApps %>% group_by(hour(statTimestamp), ApplicationName) %>% rename(month 
 
 # Calls for 8am - 6pm, get to calls per second
 # Specify Arrival Rate A: 360 calls in 15 min/900 seconds
-callsWorkHours <- primaryApps %>% filter(hour(statTimestamp) >= 8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(CallsOffered) %>% sum()
+apps_primary_total <- apps_primary %>% filter(hour(statTimestamp) >= 8 & hour(statTimestamp) <= 17) %>% select(CallsOffered) %>% sum()
+answered_primary_ptd <- answered_primary %>% filter(hour(OriginatedStamp) >= 8 & hour(OriginatedStamp) <= 17) %>% select(CallsOffered) %>% sum()
+numCallsPTD <- count(inner_join(callSummary, agents_ptd, by = "AgentID"))
+callsWorkHours <- callsWorkHours - numCallsPTD
 arrivalPerHour <- callsWorkHours / (30 * 10)
 arrivalRate <- arrivalPerHour / 4
 arrivalRate <- arrivalRate / 900
 
 # Talk Time + wrap up + hold
 # Specify duration Ts: AHT
-talkTime <- primarySkills %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(TalkTime) %>% sum()
-callsAnswered <- primarySkills %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(CallsAnswered) %>% sum()
-postTime <- primarySkills %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(PostCallProcessingTime) %>% sum()
+talkTime <- skills_primary %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(TalkTime) %>% sum()
+callsAnswered <- skills_primary %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(CallsAnswered) %>% sum()
+postTime <- skills_primary %>% filter(hour(statTimestamp) >=8 & hour(statTimestamp) <= 17 & month(statTimestamp) == 6) %>% select(PostCallProcessingTime) %>% sum()
 duration <- (talkTime + postTime)/callsAnswered
 
 # Specify number of agents m: num agents
-numAgents <- 38
+numAgents <- 24
 
 # Calculate traffic intensity u: u = A * Ts
 trafficIntensity <- arrivalRate * duration
@@ -190,6 +199,6 @@ avgSpeedAnswer <- (erlangC * duration) / (numAgents * (1 - agentOccupancy))
 # Calculate Seravice level:
 #   t = target answer time
 #   W(t) = Prob(waiting time <= t): = 1 * Ec(m, u) * e^(-(m-u) * t/Ts)
-targetAnswerTime <- 45
+targetAnswerTime <- 60
 exponent <- -(numAgents - trafficIntensity) * (targetAnswerTime / duration)
 serviceLevel <- 1 - erlangC * exp(exponent)
