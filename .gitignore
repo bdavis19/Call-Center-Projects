@@ -7,3 +7,6 @@ BRC_CC_EveryCSRCall_HIST_PROD.csv
 BRC_CC_application_DAILY_HISTORICAL_PROD.csv
 BRC_CC_skillset_DAILY_HIST_PROD.csv
 VPI List.csv
+skillsets_refined.csv
+answered_refined.csv
+applications_refined.csv
