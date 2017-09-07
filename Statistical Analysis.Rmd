@@ -17,7 +17,7 @@ aperf <-fread("agent_perf_refined.csv", na.strings = c("","NA", "\\N"))
 
 ## Introduction
 
-This document will review some statistical analysis of the call center data sets. The purpose of this capstone is to determine an efficient staffing level for the call center, so these items will be a little out of scope for the final presentation. However, the findings may still be interesting. Since my main objective has covered some of these ideas regarding call volume, I will focus on agent data for this analysis. Agent behavior directly affects call queue wait times.
+This document will review some statistical analysis of the call center data for agents. Since my main objective has covered some of these ideas regarding call volume, I will focus on agent data for this analysis. Agent behavior directly affects call queue wait times.
 
 ## Handling Time
 
@@ -66,7 +66,7 @@ num_calls_over_450_sec <- agents_over_450_sec %>% tally(n)
 seconds_over_450_sec <- answered %>% filter(HandlingTime > 450) %>% tally(HandlingTime)
 ```
 
-It looks like these agents may need additional training. In total, that's $`r num_calls_over_450_sec`$ calls in 5 months, each over 7.5 minutes in length. That's a total talk time of $`r seconds_over_450_sec/60/60`$ hours or an average of $`r round(seconds_over_450_sec/num_calls_over_450_sec/60, 2)`$ minutes per call that's over 7.5 minutes. There may be an opportunity here for the client to reduce the handling time with these agents, which would also increase the number of calls answered.
+It looks like these agents may need additional training. In total, that's $`r num_calls_over_450_sec`$ calls in 5 months, each over 7.5 minutes in length. That's a total talk time of $`r seconds_over_450_sec/60/60`$ hours or an average of $`r round(seconds_over_450_sec/num_calls_over_450_sec/60, 2)`$ minutes per call that's over 7.5 minutes. There may be an opportunity here for the call center to reduce the handling time with these agents, which would also increase the number of calls answered.
 
 ## Not Ready Time
 
