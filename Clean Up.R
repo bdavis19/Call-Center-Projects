@@ -231,3 +231,14 @@ target_answer_time <- 45
 exponent <- -(num_agents - traffic_intensity) * (target_answer_time / duration)
 service_level <- 1 - erlangC * exp(exponent)
 #########################################################################################################
+
+
+
+
+#########################################################################################################
+# Linear Regression
+#     I don't believe this offers any valuable insight, and that there are data points I do not have
+#     access to in order to have this be valuable. Or perhaps, linear regression isn't the way to go.
+#########################################################################################################
+calls1 <- lm(CallsOffered ~ ApplicationID + lubridate::wday(statTimestamp) + lubridate::hour(statTimestamp) + lubridate::mday(statTimestamp), apps_primary)
+summary(calls1)
