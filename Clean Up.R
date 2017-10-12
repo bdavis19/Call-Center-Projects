@@ -266,7 +266,7 @@ anova(model, test="Chisq")
 
 # Assessing Predictability
 fitted <- predict(model, newdata=test, type='response')
-fitted <- ifelse(fitted > 0.5, 0, 1)
+fitted <- ifelse(fitted > 0.5, 1, 0)
 misClasificError <- mean(fitted != test$Volume)
 print(paste('Accuracy', 1-misClasificError))
 
