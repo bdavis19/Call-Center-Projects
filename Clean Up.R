@@ -239,6 +239,10 @@ service_level <- 1 - erlangC * exp(exponent)
 # Logistic Regression
 #     This is an attempt predict whether the call center will have a high or low call volume day.
 #########################################################################################################
+
+# Load Data
+apps_primary <- fread("apps_primary_refined.csv")
+
 # Check missing values
 sapply(apps_primary, function(x) sum(is.na(x)))
 sapply(apps_primary, function(x) length(unique(x)))
@@ -265,13 +269,13 @@ summary(model)
 anova(model, test="Chisq")
 
 # Assessing Predictability
-fitted <- predict(model, newdata=test, type='response')
+fitted <- predict(model, newdata=train, type='response')
 fitted <- ifelse(fitted > 0.5, 1, 0)
-misClasificError <- mean(fitted != test$Volume)
+misClasificError <- mean(fitted != train$Volume)
 print(paste('Accuracy', 1-misClasificError))
 
 library(ROCR)
-p <- predict(model, newdata=test, type='response')
+p <- predict(model, newdata=train, type='response')
 pr <- prediction(p, test$Volume)
 prf <- performance(pr, measure="tpr", x.measure="fpr")
 plot(prf)
