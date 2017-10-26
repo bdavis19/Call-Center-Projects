@@ -29,13 +29,14 @@ primaryApps <- primaryApps %>% group_by(Date) %>% summarise(Sum = sum(CallsOffer
 
 # Add classification variable
 primaryApps <- primaryApps %>% mutate(Volume = ifelse(Sum > avgCallsPerDay, 1, 0))
+primaryApps <- primaryApps %>% mutate(Month=month(Date), Day=day(Date), WeekDay=wday(Date))
 
 # Fit the model
 set.seed(1979)
 split <- sample.split(primaryApps$Volume, SplitRatio = 0.7)
 train <- subset(primaryApps, split == TRUE)
 test <- subset(primaryApps, split == FALSE)
-primaryApps.mod <- glm(Volume ~ mday(Date) + month(Date) + weekdays(Date), family=binomial, data=train)
+primaryApps.mod <- glm(Volume ~ Month + Day + WeekDay, family=binomial, data=train)
 summary(primaryApps.mod)
 anova(primaryApps.mod, test="Chisq")
 
@@ -56,9 +57,10 @@ auc
 primaryApps.sse <- sum((primaryApps.pred - test$Volume)^2)
 primaryApps.sse
 table(test$Volume, primaryApps.pred)
+logisticAccuracy <- (17+20)/(17+20+8+8)
 
 ###############################################################################################
-# Tree Regression
+# Regression Tree
 ###############################################################################################
 library(caTools)
 library(rpart)
@@ -70,10 +72,29 @@ set.seed(1979)
 split <- sample.split(primaryApps$Volume, SplitRatio = 0.7)
 primaryApps.train <- subset(primaryApps, split == TRUE)
 primaryApps.test <- subset(primaryApps, split == FALSE)
-primaryApps.tree <- rpart(Volume ~ month(Date) + mday(Date) + weekdays(Date), data = primaryApps.train)
+primaryApps.tree <- rpart(Volume ~ Month + Day + WeekDay, data = primaryApps.train, method="class")
 prp(primaryApps.tree)
-primaryApps.tree.pred <- predict(primaryApps.tree, newdata = primaryApps.test)
-primaryApps.tree.sse <- sum((primaryApps.tree.pred - primaryApps.test$Volume)^2)
-primaryApps.tree.sse
+primaryApps.tree.pred <- predict(primaryApps.tree, newdata = primaryApps.test, type="class")
+table(primaryApps.test$Volume, primaryApps.tree.pred)
+treeAccuracy <- (17+23)/(17+23+8+5)
 
-# Random forest appears to be a better model in this case.
+# Regression tree appears to be a better model in this case.
+
+###############################################################################################
+# Random Forest
+###############################################################################################
+library(randomForest)
+
+set.seed(1979)
+
+# Get data into test and training
+split <- sample.split(primaryApps$Volume, SplitRatio = 0.7)
+primaryApps.train <- subset(primaryApps, split == TRUE)
+primaryApps.test <- subset(primaryApps, split == FALSE)
+
+primaryApps.train$Volume <- as.factor(primaryApps.train$Volume)
+primaryApps.test$Volume <- as.factor(primaryApps.test$Volume)
+primaryApps.forest <- randomForest(Volume ~ Month + Day + WeekDay, data = primaryApps.train, nodesize = 25, ntree = 200)
+primaryApps.forest.pred <- predict(primaryApps.forest, newdata = primaryApps.test)
+table(primaryApps.test$Volume, primaryApps.forest.pred)
+forestAccuracy <- (14+28)/(14+28+11+0)
