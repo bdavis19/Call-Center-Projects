@@ -1,0 +1,83 @@
+---
+title: "Project Report Draft"
+author: "Barry Davis"
+date: "October 31, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Call centers are an integral part of many businesses. The Customer Service Representatives (CSRs) are usually the first line of defense when troubleshooting, the gateway to sales, and a representation of the company when speaking with customers. A customer may want to speak with representatives for a number of reasons. These could be calling a bank to check account status, contacting an online company to follow up on a shipment, or even calling a university to get information on the courses and degrees offered. At the end of the day, many people have a need to speak with a human being who can assist the customer with their request.
+
+Due to the numerous reasons why someone would contact a call center, a large problem exists: How many people are going to contact the call center, and does the call center have enough people answering the phones to address those callers? This project will look at the data for a call center who was experiencing long hold times for customers and a high abandonment rate (when the caller hangs up before ever getting to speak with a CSR). We will examine the data and try to determine a staffing level that would meet demands of increasing call volume. We will look at call volume by different periods of time, and ultimately determine how many CSRs are required to answer calls in order to meet the incoming call volume. 
+
+## The Data
+For this project, I have access to five datasets:
+
+1. applications_sanitized.csv
+2. skillsets_sanitized.csv
+3. ptdAgents_sanitized.csv
+4. answered_sanitized.csv
+5. agent_perf_sanitized.csv
+
+These datasets are from the phone system used by the client. Think about when you call a company - the first thing you usually are presented with is a menu. From that menu, you have multiple options (key presses) to help direct your call. For example, the menu might say "Press 1 for Customer Service, Press 2 for Billing, or Press 3 for Sales". After you make your selection, your call is processed by an application. This application can have logic built into it on how to handle your call. This determines things like whether music should play while you wait, if any announcements are to be made while you wait, and ultimately where your call should go. The destination is a skillset. Often skillsets are broken down by category which is a generic reason for your call. If you pressed 1 for Customer Service, there is a skillset that matches Customer Service requests. Each skillset has a number of CSRs assigned to it, and those are the CSRs who are eligible to handle your call. 
+
+In the first file, applications_sanitized.csv, it contains data collected once a call is given to an application, but before it is given to a skillset. This file contains 28 fields of information including CallsOffered (how many calls were made to the call center that the application handled). Many of the fields will be ignored for our purposes, as things like IVRTerminated or CallsGivenForceDisconnect are not relevant to our problem. We're really interested in volume, calls answered (a CSR was successfullly connected to a caller), and perhaps ApplicationName since it gives some insight into why someone is calling (assuming the caller chose the correct option in the phone menu which we know is not always the case).
+
+The next file, skillsets_sanitized.csv, contains much of the same type of information as the application file, except its data collection begins when the application hands the call to the skillset. In this set, our biggest focus is on CallsAnswered, as that indicates the process completed and connected a caller to a CSR.
+
+The ptdAgents_sanitized.csv contains information about a subset of CSRs that are contracted by the client to augment their local staff. The extension of these CSRs is what's needed to identify them in the other datasets.
+
+In our answered_sanitized.csv file, we have extensions of CSRs (both local and contracted), the supervisor they report to, and information about the call after it was answered like HandlingTime (the total time from the CSR and caller connecting until one part hangs up). This will be our main focus in this dataset.
+
+Lastly, we have agent_perf_sanitized.csv. This also contains information after the call is connected to a CSR, but it focuses on the CSR's individual data points, rather than individual calls. This includes TalkTime, which shows the CSR's total time spent connected to a caller.
+
+## What We Won't Find
+Given the data in these datasets, there are some things we will not be able to determine. An important factor to the business would be why the caller is contacting the call center. While the ApplicationName can give some insight into this, it is not the best way to determine the reason for calling. Callers do not always choose the appropriate or best option in a phone menu. This could be because the caller is unsure which group can address their request or because they were impatient and pressed the first option presented to them. It can also be due to a lack of understanding of what's happening behind the scenes. For example, a caller might contact a call center because their service has stopped working. The option they chose on the menu was Troubleshooting. This would indicate there is a problem with their service. However, the reason the service stopped working was because the caller forgot to pay their bill. So the call was really to address a billing issue, and if we based everything off the application they selected, it would get labeled as a Troubleshooting issue. That's why this field could help give some insight, but should not be depended upon to determine the reason the call was placed.
+
+For the purposes of this project, we are also addressing call volume as a whole, and will not be breaking it down by application or day/time of the call. While this can be useful information, we are just looking at our initial discovery. Further work can be done to break out staffing levels per hour or per application at a later time if the client would like to investigate.
+
+## Data Wrangling
+Once the datasets were imported, we filtered out the data that pertains to the primary applications the client indicated. There are a number of applications that are not directly connected to the phone menu which are used for internal purposes. The client wants to focus on incoming call volume, so the internal applications become irrelevant to our problem. 
+
+Next, we cleaned up the data by eliminating any incomplete records with missing data, removed some fields that won't be utilized, and renamed a few fields to be easier to work with and understand. Next, the timestamps in the datasets were transformed to a format that makes them easier to utilize in R. During the data import, some of the fields were imported as characters so they needed to be changed to numeric fields. 
+
+The datasets had some partial data from 2015 and also December 2016 that was removed since we wanted to examine the call volume in 2017. Finally, each dataset was accumulated over different periods of time in 2017. That meant we needed to make sure we compared apples to apples, and only kept the data from time periods shared among all datasets. These datasets were then saved to local files so we wouldn't have to redo the data wrangling in the event we needed a fresh start.
+
+## Exploratory Analysis
+Now that our data is cleaned up, we can begin our exploratory analysis. The first part was looking at the call volume by month, separated into groups based on application. 
+
+![Figure 1](images/fig1.png)
+
+The data for February was only for the last few days of the month, so we were expecting a small volume. However, July had an influx of calls. Unfortunately, I do not have access to the information as to why it spiked, but the client does recall a number of staffing issues for that month as well as a few service outages. The outages would have increased call volume, and staffing issues could result in people hanging up and calling back again which would also result in a higher call volume. Because we could not explain it, we left the data as-is rather than normalizing it. We also see a breakdown of which applications were used to process calls. The two largest applications were install_upgrades_script and main_csr_billing_script, indicating that the majority of calls were likely related to new services, potentially sales, and billing related questions.
+
+Next we wanted to look at the number of calls abandoned. This is an important statistic in call centers because it shows how many people called and hung up the phone before being connected to a CSR. We already knew we had an issue with hold times, and that is a common factor in abandonment rate. 
+
+![Figure 2](images/fig2.png)
+
+We do see a different pattern emerge here than when looking at the calls offered. The obvious spike is in July when the client confirmed multiple issues had occurred. However, if we look at March through June, we see an increase in abandonment that isn't in the same proportion as the calls offered. Since long hold times are the most common reason for abandonment, this could indicate that a staffing issue began to exist in April, and was not addressed. With an increasing call volume and decreasing staff, less calls can be answered during a work day which leads to higher abandonment. We also notice that the two main applications for calls offered are the two biggest applications for calls abandoned. That would make sense as those applications receive a higher number of calls but it also means the client is not answering a large number of calls related to new services, sales, and billing. Those categories are calls we want to answer as they grow the company and make sure services are being paid. 
+
+So far we've viewed the calls on a monthly basis, but what about weekly?
+
+![Figure 3](images/fig3.png)
+
+On a week to week basis, the call volume goes up and down, but on average remains about the same until we get to week 23 where the volume begins to increase slightly. This is in June where there are a number of seasonal customers. The increase here is likely explained by customers wanting services for the summer. However, let us look at weeks 27, 28, and 29. Those are the first three weeks in July where the volume spikes. This is consistent with what the client had explained. After some of the outage issues were resolved, the volume had gone back to a normal seasonal level.
+
+Our next view was to look at the calls offered by day of the week. We know that call volume drops on the weekend, but by how much?
+
+![Figure 4](images/fig4.png)
+
+Here we can see that volume on Sundays is the lowest it will be all week, follow by Saturday. However, Saturdays get almost double the volume of Sundays. This is useful information because should the client want to dive deeper into this staffing problem, we can already guess that the client will need a larger staff available on Saturdays than Sundays. And through March to August, the volume on days during the work week are significantly higher than a given day on the weekend. 
+
+Lastly, we'll look at the calls offered by hour. 
+
+![Figure 5](images/fig5.png)
+
+Here we see a large spike in volume starting around 8am and lasting until around 9pm. This is what we'd expect since those are the hours where most people are awake and wanting to deal with their issues or questions. Mid-day is our peak times and could likely be due to common lunch hours among callers. Again, our main applications being utilized are still install_upgrades_script and main_csr_billing_script.
+
+## Recommended Analysis
+The nature of this call center problem is not a new one. It has existed since the first telephone was available to receive calls. We will be using what's known as the Erlang-C formula to determine an appropriate staffing level based on the call volume.
