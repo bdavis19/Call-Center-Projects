@@ -80,4 +80,27 @@ Lastly, we'll look at the calls offered by hour.
 Here we see a large spike in volume starting around 8am and lasting until around 9pm. This is what we'd expect since those are the hours where most people are awake and wanting to deal with their issues or questions. Mid-day is our peak times and could likely be due to common lunch hours among callers. Again, our main applications being utilized are still install_upgrades_script and main_csr_billing_script.
 
 ## Recommended Analysis
-The nature of this call center problem is not a new one. It has existed since the first telephone was available to receive calls. We will be using what's known as the Erlang-C formula to determine an appropriate staffing level based on the call volume.
+The nature of this call center problem is not a new one. It has existed since the first telephone was available to receive calls. We will be using what's known as the Erlang-C formula to determine an appropriate staffing level based on the call volume. For this project, we'll be looking at the volume on a daily basis and coming up with a staffing level that covers the span of a day. Deeper analysis can be an option in the future to determine staffing levels every 15 minutes, in hour intervals.
+
+The Erlang-C formula looks like this:
+
+$$E_c(m,u) = \frac{\frac{u^m}{m!}}{\frac{u^m}{m!}+(1-p)\sum_{k=0}^{m-1} \frac{u^k}{k!}}$$
+The first thing that's needed is to limit the volume to the main operational hours of the call center, which is 8am-6pm. However, the outsourced call center is not 100% dedicated to answering calls for the client meaning they can take calls that aren't for the client during the day. So we will subtract the calls offered to those agents from our total volume. There is a second outsourced call center that also is removed from our count here. Then we calculate our arrival rate which is measured in calls per 15 minutes. 
+
+After determining our arrival rate, we calculate the total handle time of the call. This includes hold time as well as talk time. Again, from this dataset we also will remove the outsourced call data. Now we can determine the duration of our calls. At this point, we can state how many agents are available to determine the Service Level we are providing. However, in this case we want to target an 80% Service Level, so we're going to inflate the number of agents available. Since the client is currently under 80% Service Level, we know the staffing level is too low so we increase the number of available agents to find out what Service Level would be obtained. The number of agents used is 37.
+
+The next part of the fomula is to calculate the Traffic Intensity, which is the arrival rate multiplied by the duration. Then we calculate Occupancy which is the Traffic Intensity divded by the number of available agents. Finally, we have all the variables in the formula and we just need to plug in the values and calculate it.
+
+Now we have an Erlang value, we will take that and multiply it by 100 to get the probability that a caller will have to wait before being connected to an CSR. We then calculate the Average Speed to Answer. Next we define the target answer time, which in this case is 45 seconds. Using the above information, we can calculate the Service Level which is 80.35%. 
+
+## Conclusion
+
+By using the Erlang-C formula, we have been able to determine that in order to meet the client's call volume needs, they will need to have 37 available CSRs throughout the day to answer all of the calls.
+
+Again, this is only based on daily call volume. So the first thing I recommend is that the client compare their current number of available CSRs to the target of 37 and see how far off they are. We'll need to make sure that there's support for hiring additional CSRs. Then we can do a similar analysis on the data but look at the volume on a per hour basis. This way more shifts can be created and the number of available CSRs would more accuractely reflect the volume in that hour. We know that calls do not come in at a steady rate, so breaking it down on an hourly level would be beneficial.
+
+## Future Steps
+
+The datasets provided are of aggregated data in 15 minute intervals. This means the individual call records are not available at this time. If that data can be made available, we can look closely at CSR performance statistics. These statistics can indicate training areas for CSRs. For example, if a CSR frequently goes over the target handle time for calls, that can have a negative impact on how many calls are answered during the day. If a CSR frequently is in a Not Ready state, that will negatively impact the calls answered. These are things that can be done to make the current staff more efficient, and potentially eliminate the need for a few new positions.
+
+We could also perform logistic regression on the dataset of individual calls to determine whether or not a caller will abandon the call or not. Then, we can monitor the calls in real time to see callers abandon the queues. While there's currently no way to address those calls (selectively answer them), seeing callers drop from queues in real time can be a visual motivator to resolve the issue and provide additional motivation for the approval of hiring more CSRs.
