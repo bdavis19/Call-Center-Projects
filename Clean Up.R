@@ -12,10 +12,21 @@ answered <- fread("answered_sanitized.csv", na.strings = c("","NA"))
 aperf <-fread("agent_perf_sanitized.csv", na.strings = c("","NA", "\\N"))
 
 # Filter for applications and skillsets to use for analysis
-apps_primary <- apps[ApplicationName %in% c("xfer_from_bcs_script", "bilingual", "p_2_xfer_script", "p_csr_xfer_2_script", "ivr_transfer_script", "xfer_from_new_agent", "disconnect_script", "dbb_script", "hs_script", "install_upgrades_script", "main_csr_billing_script", "troubleshooting_script", "unanswered_pn_calls_script", "xfer_from_pn_script")]
-skills_primary <- skills[SkillsetName %in% c("bcs_xfer", "bilingual", "xfer_from_ivr", "xfer_from_pn", "unanswered_pn_calls", "xfer_from_new_agent", "p_csr_xfer_2_brc", "p_2_xfer", "disconnect", "dbb", "hs", "main_csr_billing", "troubleshooting", "install_upgrades")]
+apps_primary <- apps[ApplicationName %in% c("xfer_from_bcs_script", "bilingual", "p_2_xfer_script", "p_csr_xfer_2_script", 
+                                            "ivr_transfer_script", "xfer_from_new_agent", "disconnect_script", "dbb_script", 
+                                            "hs_script", "install_upgrades_script", "main_csr_billing_script", "troubleshooting_script", 
+                                            "unanswered_pn_calls_script", "xfer_from_pn_script")]
+skills_primary <- skills[SkillsetName %in% c("bcs_xfer", "bilingual", "xfer_from_ivr", "xfer_from_pn", "unanswered_pn_calls", 
+                                             "xfer_from_new_agent", "p_csr_xfer_2_brc", "p_2_xfer", "disconnect", "dbb", "hs", 
+                                             "main_csr_billing", "troubleshooting", "install_upgrades")]
 setDT(answered)
-answered_primary <- answered[ApplicationName %in% c("xfer_from_bcs_script", "bilingual", "p_2_xfer_script", "p_csr_xfer_2_script", "ivr_transfer_script", "xfer_from_new_agent", "disconnect_script", "dbb_script", "hs_script", "install_upgrades_script", "main_csr_billing_script", "troubleshooting_script", "unanswered_pn_calls_script", "xfer_from_pn_script") | SkillsetName %in% c("bcs_xfer", "bilingual", "xfer_from_ivr", "xfer_from_pn", "unanswered_pn_calls", "xfer_from_new_agent", "p_csr_xfer_2_brc", "p_2_xfer", "disconnect", "dbb", "hs", "main_csr_billing", "troubleshooting", "install_upgrades")]
+answered_primary <- answered[ApplicationName %in% c("xfer_from_bcs_script", "bilingual", "p_2_xfer_script", "p_csr_xfer_2_script", 
+                                                    "ivr_transfer_script", "xfer_from_new_agent", "disconnect_script", "dbb_script", 
+                                                    "hs_script", "install_upgrades_script", "main_csr_billing_script", 
+                                                    "troubleshooting_script", "unanswered_pn_calls_script", "xfer_from_pn_script") 
+                             | SkillsetName %in% c("bcs_xfer", "bilingual", "xfer_from_ivr", "xfer_from_pn", "unanswered_pn_calls", 
+                                                   "xfer_from_new_agent", "p_csr_xfer_2_brc", "p_2_xfer", "disconnect", "dbb", "hs", 
+                                                   "main_csr_billing", "troubleshooting", "install_upgrades")]
 
 # Remove NA, remove spares, make column names better, remove training room records, remove names and columns
 # that aren't needed from agents_ptd
@@ -24,7 +35,12 @@ agents_ptd <- agents_ptd %>% filter(!(is.na(Ext)))
 colnames(agents_ptd)[colnames(agents_ptd) == "Ext"] <- "AgentID"
 
 # Remove NA, remove colums
-answered_primary <- answered_primary %>% mutate(CCMID = NULL, ProviderContactID = NULL, Originator = NULL, RoutePoint = NULL, ApplicationStartStamp = NULL, LastTreatmentID = NULL, LastTreatmentStamp = NULL, LastTreatmentTime = NULL, SkillsetQueuedStamp = NULL, InitialDisposition = NULL, ServiceStamp = NULL, NumberOfTimesOnHold = NULL, NumberOfTimesRTQ = NULL, FinalDisposition = NULL, FinalDispositionStamp = NULL, NextSegmentID = NULL, ContactOriginatedStamp = NULL, DisconnectSource = NULL, AgentName = NULL, SupervisorName = NULL, SupervisorID = NULL)
+answered_primary <- answered_primary %>% 
+  mutate(CCMID = NULL, ProviderContactID = NULL, Originator = NULL, RoutePoint = NULL, ApplicationStartStamp = NULL, 
+         LastTreatmentID = NULL, LastTreatmentStamp = NULL, LastTreatmentTime = NULL, SkillsetQueuedStamp = NULL, 
+         InitialDisposition = NULL, ServiceStamp = NULL, NumberOfTimesOnHold = NULL, NumberOfTimesRTQ = NULL, 
+         FinalDisposition = NULL, FinalDispositionStamp = NULL, NextSegmentID = NULL, ContactOriginatedStamp = NULL, 
+         DisconnectSource = NULL, AgentName = NULL, SupervisorName = NULL, SupervisorID = NULL)
 answered_primary <- na.omit(answered_primary, c("AgentID"))
 
 # We will be putting the timestamps into the correct format for use.
@@ -52,11 +68,24 @@ skills_primary <- skills_primary[month(statTimestamp) != 12]
 
 # Only keep data for the least amount I have between all sets to work in the same time frame/totals
 # The agent performance only goes back to 2/26. The newest common date between sets is 8/20
-apps_primary <- apps_primary %>% filter(statTimestamp >= "2017-02-26" & statTimestamp <= "2017-08-20")
-aperf <- aperf %>% filter(statTimestamp >= "2017-02-26" & statTimestamp <= "2017-08-20")
-skills_primary <- skills_primary %>% filter(statTimestamp >= "2017-02-26" & statTimestamp <= "2017-08-20")
-answered_primary <- answered_primary %>% filter(OriginatedStamp >= "2017-02-26" & OriginatedStamp <= "2017-08-20" & HandlingTime > 0)
+apps_primary <- apps_primary %>% 
+  filter(statTimestamp >= "2017-02-26" & statTimestamp <= "2017-08-20")
+aperf <- aperf %>% 
+  filter(statTimestamp >= "2017-02-26" & statTimestamp <= "2017-08-20")
+skills_primary <- skills_primary %>% 
+  filter(statTimestamp >= "2017-02-26" & statTimestamp <= "2017-08-20")
+answered_primary <- answered_primary %>% 
+  filter(OriginatedStamp >= "2017-02-26" & OriginatedStamp <= "2017-08-20" & HandlingTime > 0)
 
+# Remove columns
+apps_primary <- apps_primary %>% 
+  select(statTimestamp, ApplicationID, CallsAnswered, CallsOffered, TalkTime, ApplicationName, CallsAbandoned)
+skills_primary <- skills_primary %>% select(statTimestamp, SkillsetID, ApplicationID, CallsAnswered, CallsOffered, TalkTime, 
+                                            ApplicationName, SkillsetName)
+answered_primary <- answered_primary %>% 
+  select(ApplicationID, SkillsetID, AgentID, OriginatedStamp, HandlingTime, ApplicationName,SkillsetName)
+aperf <- aperf %>% 
+  select(statTimestamp, TelsetLoginID, CallsAnswered, CallsOffered, TalkTime, NotReadyTime)
 
 # Create new files for those that needed clean up.
 write.csv(apps_primary, "apps_primary_refined.csv", row.names = FALSE)
@@ -69,19 +98,25 @@ write.csv(aperf, "agent_perf_refined.csv", row.names = FALSE)
 # BEGIN EXPLORATORY ANALYSIS PLOTS
 # Call Volume
 # Add factors
+library(scales)
 apps_primary$ApplicationName <- apps_primary$ApplicationName %>% as.factor()
 
 # Plot monthly view of calls offered, abandoned, answered
 ggplot(apps_primary, aes(x = month(statTimestamp), y = CallsOffered, fill = ApplicationName)) + 
-  geom_col()
+  geom_col() +
+  labs(x="Month", y="Call Volume") +
+  scale_x_continuous(breaks=c(2,3,4,5,6,7,8), labels=c("Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"))
 ggplot(apps_primary, aes(x = month(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
-  geom_col()
+  geom_col() +
+  labs(x="Month", y="Calls Abandoned") +
+  scale_x_continuous(breaks=c(2,3,4,5,6,7,8), labels=c("Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"))
 ggplot(skills_primary, aes(x = month(statTimestamp), y = CallsAnswered, fill = SkillsetName)) + 
   geom_col()
 
 # week
 ggplot(apps_primary, aes(x = week(statTimestamp), y = CallsOffered, fill = ApplicationName)) +
-  geom_col()
+  geom_col() +
+  labs(x="Week of Year", y="Call Volume")
 ggplot(apps_primary, aes(x = week(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
   geom_col()
 ggplot(skills_primary, aes(x = week(statTimestamp), y = CallsAnswered, fill = SkillsetName)) +
@@ -97,7 +132,9 @@ ggplot(skills_primary, aes(x = mday(statTimestamp), y = CallsAnswered, fill = Sk
 
 # day of week
 ggplot(apps_primary, aes(x = wday(statTimestamp), y = CallsOffered, fill = ApplicationName)) +
-  geom_col()
+  geom_col() +
+  labs(x="Day of Week", y="Call Volume") +
+  scale_x_continuous(breaks=c(1,2,3,4,5,6,7), labels=c("Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"))
 ggplot(apps_primary, aes(x = wday(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
   geom_col()
 ggplot(skills_primary, aes(x = wday(statTimestamp), y = CallsAnswered, fill = SkillsetName)) +
@@ -107,6 +144,7 @@ ggplot(skills_primary, aes(x = wday(statTimestamp), y = CallsAnswered, fill = Sk
 xscale <- scale_x_continuous(breaks = c(0:23),labels = c("0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"))
 ggplot(apps_primary, aes(x = hour(statTimestamp), y = CallsOffered, fill = ApplicationName)) +
   geom_col() +
+  labs(x="Hour", y="Call Volume") +
   xscale
 ggplot(apps_primary, aes(x = hour(statTimestamp), y = CallsAbandoned, fill = ApplicationName)) +
   geom_col() +
